@@ -29,9 +29,4 @@ steps:
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
   displayName: 'Create NuGet package'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-  displayName: 'Puch package to repository'
+
