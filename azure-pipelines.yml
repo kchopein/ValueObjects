@@ -12,11 +12,6 @@ pool:
 steps:
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'restore'
-    feedsToUse: 'select'
-  displayName: 'Restore packages'
-- task: DotNetCoreCLI@2
-  inputs:
     command: 'build'
   displayName: 'Build'
 - task: DotNetCoreCLI@2
