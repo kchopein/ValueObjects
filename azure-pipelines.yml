@@ -14,22 +14,24 @@ steps:
   inputs:
     command: 'restore'
     feedsToUse: 'select'
+  displayName: 'Restore packages'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+  displayName: 'Build'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
+  displayName: 'Run tests'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
-
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  displayName: 'Create NuGet package'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+  displayName: 'Puch package to repository'
